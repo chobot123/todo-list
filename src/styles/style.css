@@ -1,0 +1,100 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0px;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-image: url("./src/aaron-burden-xG8IQMqMITM-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: white;
+}
+
+#title {
+    font-size: 68px;
+    text-align: center; 
+    border-bottom: black solid 5px;
+    padding: 15px 0px;
+    font-family: 'Patrick Hand', cursive;
+    font-family: 'Rubik Mono One', sans-serif;
+}
+
+.list-container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    border-right: black solid 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 30px;
+    gap: 100px;
+}
+
+#projects-title {
+    font-size: 36px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 2px;
+}
+
+li {
+    padding-bottom: 10px;
+}
+
+#folder {
+    font-size: 25px;
+    border: 0px;
+    background-color: transparent;
+    color: white;
+}
+
+.item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: white solid 5px;
+	margin: 30px 100px;
+	padding: 15px;
+	border-radius: 40px;
+	background-color: linear;
+	background: linear-gradient(#a0793d, #461f00);
+}
+
+.list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+}
+
+.item-properties,
+.item-title {
+    display: flex;
+    align-items: center;
+}
+
+#name {
+    align-self: center;
+    border-radius: 20px;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#add-project {
+    font-size: 20px;
+    border-radius: 20px;
+}
