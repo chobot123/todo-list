@@ -1,10 +1,11 @@
 import _ from 'lodash';
+
 import './styles/style.css'
 
-import { makeUI } from './modules/main';
+import {runModal} from './modules/test'
 
 const content = document.querySelector(".content");
 
-makeUI();
+runModal();
 
 export {content}

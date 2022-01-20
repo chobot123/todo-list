@@ -5,3 +5,5 @@ const init = () => {
     makeHeader();
     makeProjects();
 }
+
+export { init } 
