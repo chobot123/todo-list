@@ -4,11 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik+Mono+One&family=The+Nautigal:wght@700&display=swap" rel="stylesheet">
+    <title>To-Do List</title>
 </head>
 <body>
-    <div class="content"></div>
+    <div class="content">
+        <div id="title">&#9745 My To-Do List</div>
+        <div class="list-container">
+            <div class="sidebar">
+                <div class="projects">
+                    <div id="projects-title">PROJECTS</div>
+                    <ul id="folders">
+                        <li><button id="folder">&#128193 Default</button></li>
+                        <li><button id="folder">&#128193 Default</button></li>
+                    </ul>
+                </div> 
+                <button id="add-project" data-modal-target="#modal">+Add New Project</button>
+                <div class="modal" id="modal">
+                    <div class="modal-header">
+                      <div class="title">Add New Project</div>
+                      <button data-close-button class="close-button">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="get">
+                            <label for="name">Project Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Project Name">
+                            <p>
+                                <button id="add" type="submit">Add Book</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+                <div id="overlay"></div>
+            </div>
+            <div class="list">
+                <div class="item-container">
+                    <div class="item">
+                        <div id="item-title">
+                            <button id="check">check</button> 
+                            Test
+                        </div>
+                        <div class="item-properties">
+                            <div id="item-due">Due-Date</div>
+                            <button id="item-desc">Details</button>
+                            <button id="priority">Priority</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div id="item-title">
+                            <button id="check">check</button> 
+                            Test
+                        </div>
+                        <div class="item-properties">
+                            <div id="item-due">Due-Date</div>
+                            <button id="item-desc">Description</button>
+                            <button id="priority">Priority</button>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-item">+Add To-Do Item</button>
+            </div>
+        </div>
+    </div>
     <script src="main.js"></script>
-
 </body>
 </html>
