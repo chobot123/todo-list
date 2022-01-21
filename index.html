@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik+Mono+One&family=The+Nautigal:wght@700&display=swap" rel="stylesheet">
-    <title>To-Do List</title>
 </head>
 <body>
     <div class="content">
@@ -17,12 +18,11 @@
                 <div class="projects">
                     <div id="projects-title">PROJECTS</div>
                     <ul id="folders">
-                        <li><button id="folder">&#128193 Default</button></li>
-                        <li><button id="folder">&#128193 Default</button></li>
+                        <li><button id="0" class="folder active">&#128193 Default</button></li>
                     </ul>
                 </div> 
-                <button id="add-project" data-modal-target="#modal">+Add New Project</button>
-                <div class="modal" id="modal">
+                <button id="add-project" data-modal-target="#modal-one">+Add New Project</button>
+                <div class="modal" id="modal-one">
                     <div class="modal-header">
                       <div class="title">Add New Project</div>
                       <button data-close-button class="close-button">&times;</button>
@@ -32,7 +32,7 @@
                             <label for="name">Project Name:</label>
                             <input type="text" id="name" name="name" placeholder="Project Name">
                             <p>
-                                <button id="add" type="submit">Add Book</button>
+                                <button data-close-button id="add" type="submit">Add Book</button>
                             </p>
                         </form>
                     </div>
@@ -48,8 +48,10 @@
                         </div>
                         <div class="item-properties">
                             <div id="item-due">Due-Date</div>
-                            <button id="item-desc">Details</button>
+                            <button id="item-desc">Description</button>
                             <button id="priority">Priority</button>
+                            <button id="remove">Remove</button>
+                            <button id="notes">notes/edit</button>
                         </div>
                     </div>
                     <div class="item">
@@ -61,13 +63,48 @@
                             <div id="item-due">Due-Date</div>
                             <button id="item-desc">Description</button>
                             <button id="priority">Priority</button>
+                            <button id="remove">Remove</button>
+                            <button id="notes">notes/edit</button>
                         </div>
                     </div>
                 </div>
-                <button id="add-item">+Add To-Do Item</button>
+                <button id="add-item" data-modal-target="#modal-two">+Add To-Do Item</button>
+                <div class="modal" id="modal-two">
+                    <div class="modal-header">
+                      <div class="title">Add New Item</div>
+                      <button data-close-button class="close-button">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="get">
+                            <p>
+                                <label for="name">Item name:</label>
+                                <input type="text" id="name" name="name" placeholder="Item Name">
+                            </p>
+                            <p>
+                                <label for="details">Item Details: </label>
+                                <input type="text" id="details" name="details" placeholder="Details">
+                            </p>
+                            <p>
+                                <label for="date">Item name:</label>
+                                <input type="date" id="date" name="date">
+                            </p>
+                            <p> Priority: 
+                                <label for="low">low</label>
+                                <input type="radio" id="low" name="priority" value = "low">
+                                <label for="medium">medium</label>
+                                <input type="radio" id="medium" name="priority" value = "medium">
+                                <label for="high">high</label>
+                                <input type="radio" id="high" name="priority" value = "high">
+                            </p>
+                            <p>
+                                <button data-close-button id="add" type="submit">Add Item</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
