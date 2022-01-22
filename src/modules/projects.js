@@ -15,15 +15,22 @@ const getFolder = document.querySelector(".folder.active")
 
 //uses form input of project name to add to project
 const getProject = (e) => {
+
   e.preventDefault();
-  console.log(e.target);
-  console.log(e.target.elements);
+
   const {name} = e.target.elements; //get name from user input
-  console.log(name.value);
+  
   let newProject = Project(name.value); //make a new project with that name
   projectList.push(newProject); //add that project to the project array list
   displayFolder(name.value); //display the new project folder
   getForm.reset();
+}
+
+//displays the folder that was made by appending to folders container
+const displayFolder = (name) => {
+
+    displayList.appendChild(makeFolder(name));
+
 }
 
 //makes a project folder given its name to:
@@ -31,22 +38,27 @@ const getProject = (e) => {
 //add to display
 const makeFolder = (name) => {
 
+    //make a list element and append the newly made folder to it
     let listContainer = document.createElement("li");
-
     let temp = document.createElement("button");
     temp.className = "folder";
     temp.id = projectList.length - 1;
     temp.innerHTML = `&#128193 ${name.charAt(0).toUpperCase() + name.slice(1)}`;
-
     listContainer.appendChild(temp);
+
+    //make a item list container that shares the same id as the folder (for reference later)
+    makeItemList(projectList.length - 1);
+
     return listContainer;
 
 }
 
-//displays the folder that was made by appending to folders container
-const displayFolder = (name) => {
-    const folders = document.getElementById("folders");
-    folders.appendChild(makeFolder(name));
+const makeItemList = (index) => {
+    const list = document.querySelector(".item-container-list");
+
+    const itemContainer = document.createElement("div");
+    itemContainer.className = `item-container-${index}`;
+    list.appendChild(itemContainer);
 
 }
 
@@ -55,15 +67,19 @@ const selectFolder = () => {
     displayList.addEventListener("click", (event) => {
         for(let i = 0; i < displayList.children.length; i++){
             let currentProject = displayList.children[i].firstChild;
+            let itemList = document.querySelector(`.item-container-${i}`);
+            console.log(itemList);
             if(event.target.id === currentProject.id){
                 event.target.classList.add("active");
+                itemList.style.display = "initial";
+
             }
-            else {currentProject.classList.remove("active")}
+            else {
+                currentProject.classList.remove("active");
+                itemList.style.display = "none";
+            }
         }
     })
 }
 
-
-
-
-export { getForm, getProject, projectList, displayList, selectFolder, getFolder}
+export { getForm, getProject, displayList, selectFolder, projectList, getFolder }
