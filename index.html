@@ -24,13 +24,13 @@
                 <button id="add-project" data-modal-target="#modal-one">+Add New Project</button>
                 <div class="modal" id="modal-one">
                     <div class="modal-header">
-                      <div class="title">Add New Project</div>
+                      <div class="title">Details</div>
                       <button data-close-button class="close-button">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form action="" method="get">
                             <label for="name">Project Name:</label>
-                            <input type="text" id="name" name="name" placeholder="Project Name">
+                            <input type="text" id="name" name="name" placeholder="Project Name" required>
                             <p>
                                 <button data-close-button id="add" type="submit">Add Book</button>
                             </p>
@@ -40,36 +40,30 @@
                 <div id="overlay"></div>
             </div>
             <div class="list">
-                <div class="item-container">
-                    <div class="item">
-                        <div id="item-title">
-                            <button id="check">check</button> 
-                            Test
-                        </div>
-                        <div class="item-properties">
-                            <div id="item-due">Due-Date</div>
-                            <button id="item-desc">Description</button>
-                            <button id="priority">Priority</button>
-                            <button id="remove">Remove</button>
-                            <button id="notes">notes/edit</button>
-                        </div>
+                <button id="details-button" data-modal-target="#modal-two" class="disabled">Details</button>
+                <div class="modal" id="modal-two">
+                    <div class="modal-header">
+                      <div class="title">Details</div>
+                      <button data-close-button class="close-button">&times;</button>
                     </div>
-                    <div class="item">
-                        <div id="item-title">
-                            <button id="check">check</button> 
-                            Test
+                    <div class="modal-body">
+                        <div class="item-name">Item Name: 
+                            <div id="name-body"></div>
                         </div>
-                        <div class="item-properties">
-                            <div id="item-due">Due-Date</div>
-                            <button id="item-desc">Description</button>
-                            <button id="priority">Priority</button>
-                            <button id="remove">Remove</button>
-                            <button id="notes">notes/edit</button>
+                        <div class="item-details">Item Details: 
+                            <textarea id="detail-body"></textarea>
+                        </div>
+                        <div class="due-date">Item Due Date: 
+                            <div id="date-body"></div>
+                        </div>
+                        <div class="item-priority">Item Priority: 
+                            <div id="priority-body"></div>
                         </div>
                     </div>
                 </div>
-                <button id="add-item" data-modal-target="#modal-two">+Add To-Do Item</button>
-                <div class="modal" id="modal-two">
+                <div class = "item-container-list"><div class="item-container-0"></div></div>
+                <button id="add-item" data-modal-target="#modal-three">+Add To-Do Item</button>
+                <div class="modal" id="modal-three">
                     <div class="modal-header">
                       <div class="title">Add New Item</div>
                       <button data-close-button class="close-button">&times;</button>
@@ -78,14 +72,14 @@
                         <form action="" method="get">
                             <p>
                                 <label for="name">Item name:</label>
-                                <input type="text" id="name" name="name" placeholder="Item Name">
+                                <input type="text" id="name" name="name" placeholder="Item Name" required>
                             </p>
                             <p>
                                 <label for="details">Item Details: </label>
-                                <input type="text" id="details" name="details" placeholder="Details">
+                                <textarea id="details" name="details" placeholder="Details" rows="4" cols="9"></textarea>
                             </p>
                             <p>
-                                <label for="date">Item name:</label>
+                                <label for="date">Item Due Date:</label>
                                 <input type="date" id="date" name="date">
                             </p>
                             <p> Priority: 
