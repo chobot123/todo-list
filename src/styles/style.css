@@ -108,6 +108,7 @@ li {
     display: flex;
     flex: 1;
     flex-direction: column;
+    align-items: center;
 
 }
 
@@ -246,4 +247,16 @@ li {
 
    .item-priority {
      gap: 26px;
+   }
+
+   .low {
+     background-color: green;
+   }
+
+   .medium {
+     background-color: yellow;
+   }
+
+   .high {
+     background-color: red;
    }
