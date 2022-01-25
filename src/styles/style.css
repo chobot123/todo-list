@@ -201,6 +201,22 @@ li {
     pointer-events: all;
   }
 
+  #item-notes,
+  #item-remove,
+  .item-details,
+  #item-priority {
+    font-size: 26px;
+    background-color: transparent;
+    border: 0px;
+  }
+
+  #item-notes:hover,
+  #item-remove:hover,
+  .item-details:hover,
+  #item-priority:hover {
+    font-weight: bolder;
+  }
+
   /* ---------------CHECK BOX---------------- */
 
    /* Customize the label (the container) */
@@ -235,7 +251,8 @@ li {
      gap: 31px;
    }
 
-   #detail-body {
+   #detail-details,
+   #detail-edit {
      min-width: 200px;
      min-height: 100px;
    }
@@ -259,4 +276,18 @@ li {
 
    .high {
      background-color: red;
+   }
+
+   #details-style {
+     display: flex;
+   }
+
+   #details,
+   #edit-details {
+     margin-left: 24px;
+   }
+
+   #edit-name,
+   #name {
+     margin-left: 32px;
    }

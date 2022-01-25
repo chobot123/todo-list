@@ -40,25 +40,59 @@
                 <div id="overlay"></div>
             </div>
             <div class="list">
-                <button id="details-button" data-modal-target="#modal-two" class="disabled">Details</button>
-                <div class="modal" id="modal-two">
+                <button id="details-button" data-modal-target="#modal-details" class="disabled"></button>
+                <div class="modal" id="modal-details">
                     <div class="modal-header">
                       <div class="title">Details</div>
                       <button data-close-button class="close-button">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="item-name">Item Name: 
-                            <div id="name-body"></div>
+                            <div id="name-details"></div>
                         </div>
                         <div class="item-details">Item Details: 
-                            <div id="detail-body"></div>
+                            <div id="detail-details"></div>
                         </div>
                         <div class="due-date">Item Due Date: 
-                            <div id="date-body"></div>
+                            <div id="date-details"></div>
                         </div>
                         <div class="item-priority">Item Priority: 
-                            <div id="priority-body"></div>
+                            <div id="priority-details"></div>
                         </div>
+                    </div>
+                </div>
+                <button id="edit-button" data-modal-target="#modal-edit" class="disabled"></button>
+                <div class="modal" id="modal-edit">
+                    <div class="modal-header">
+                      <div class="title">Edit To-Do Item</div>
+                      <button data-close-button class="close-button">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="get">
+                            <p>
+                                <label for="name">Item name:</label>
+                                <input type="text" id="edit-name" name="name" placeholder="Item Name">
+                            </p>
+                            <p id="details-style">
+                                <label for="details">Item Details: </label>
+                                <textarea id="edit-details" name="details" placeholder="Details" rows="4" cols="9"></textarea>
+                            </p>
+                            <p>
+                                <label for="date">Item Due Date:</label>
+                                <input type="date" id="edit-date" name="date">
+                            </p>
+                            <p> Priority: 
+                                <label for="low">low</label>
+                                <input type="radio" id="edit-low" name="priority" value = "low" >
+                                <label for="medium">medium</label>
+                                <input type="radio" id="edit-medium" name="priority" value = "medium" >
+                                <label for="high">high</label>
+                                <input type="radio" id="edit-high" name="priority" value = "high" >
+                            </p>
+                            <p>
+                                <button data-close-button id="add" type="submit">Confirm Edit</button>
+                            </p>
+                        </form>
                     </div>
                 </div>
                 <div class = "item-container-list"><div class="item-container-0"></div></div>
@@ -74,21 +108,21 @@
                                 <label for="name">Item name:</label>
                                 <input type="text" id="name" name="name" placeholder="Item Name" required>
                             </p>
-                            <p>
+                            <p id="details-style">
                                 <label for="details">Item Details: </label>
-                                <textarea id="details" name="details" placeholder="Details" rows="4" cols="9"></textarea>
+                                <textarea id="details" name="details" placeholder="Details" rows="4" cols="9" required></textarea>
                             </p>
                             <p>
                                 <label for="date">Item Due Date:</label>
-                                <input type="date" id="date" name="date">
+                                <input type="date" id="date" name="date"required>
                             </p>
                             <p> Priority: 
                                 <label for="low">low</label>
-                                <input type="radio" id="low" name="priority" value = "low" >
+                                <input type="radio" id="low" name="priority" value = "low" required>
                                 <label for="medium">medium</label>
-                                <input type="radio" id="medium" name="priority" value = "medium" >
+                                <input type="radio" id="medium" name="priority" value = "medium" required>
                                 <label for="high">high</label>
-                                <input type="radio" id="high" name="priority" value = "high" >
+                                <input type="radio" id="high" name="priority" value = "high" required>
                             </p>
                             <p>
                                 <button data-close-button id="add" type="submit">Add Item</button>

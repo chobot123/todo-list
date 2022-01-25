@@ -1,10 +1,10 @@
 import { projectList } from "./projects"; //to assign to-do items to each project in the list
 
-const getItemForm = document.forms[1];
+const getItemForm = document.forms[2];
 const itemList = document.querySelector(".list");
 
 const Items = (title, details, dueDate, priority, indexInProject) => {
-    priority = "low";
+
     return {
         title,
         details,
@@ -12,6 +12,7 @@ const Items = (title, details, dueDate, priority, indexInProject) => {
         priority,
         indexInProject
     }
+
 }
 
 //GET INPUT
@@ -23,8 +24,10 @@ const Items = (title, details, dueDate, priority, indexInProject) => {
 const getItem = (e) => {
   e.preventDefault();
   //get user input to make an item
-  const {name, details, date, priority} = e.target.elements; 
+  const {name, details, date, priority} = e.target.elements;
+  console.log(priority.value);
   const newItem = Items(name.value, details.value, date.value, priority.value);
+
   
   assignItem(newItem); //add item to selected project
 
@@ -45,6 +48,7 @@ const assignItem = (item) => {
 
 //DISPLAYS THE ITEM AND IMPLEMENTS ITS FUNCTIONS
 const makeItem = (item) => {
+
     /*
     
     itemContainer
@@ -67,6 +71,7 @@ const makeItem = (item) => {
 
     const titleContainer = document.createElement("div"); //container for item title and if item is checked off
     titleContainer.className = "title-container";
+
     itemContainer.appendChild(titleContainer);
 
     const checkItem = document.createElement("INPUT"); //check if item is complete
@@ -97,7 +102,7 @@ const makeItem = (item) => {
 
     const itemDetails = document.createElement("button"); //item details button
     itemDetails.className = "item-details";
-    itemDetails.innerHTML = "Details";
+    itemDetails.innerHTML = "🗒";
     itemDetails.addEventListener("click", getDetail); //Gets all the item details for the modal on click
 
     itemProperties.appendChild(itemDetails);
@@ -105,21 +110,22 @@ const makeItem = (item) => {
 
     const itemPriority = document.createElement("button"); //priority changer button
     itemPriority.id = "item-priority";
-    itemPriority.classList.add(item.priority);
     itemContainer.classList.add(item.priority);
-    itemPriority.innerText = "Priority";
+    itemPriority.innerHTML = "&#128680;";
     itemPriority.addEventListener("click", changePriority) //changes priority of item
 
     itemProperties.appendChild(itemPriority);
 
     const itemNotes = document.createElement("button"); //edit item button
     itemNotes.id = "item-notes";
-    itemNotes.innerText = "notes/edit";
-    itemProperties.appendChild(itemNotes);
+    itemNotes.innerHTML = "&#9997";
+    itemNotes.addEventListener("click", editItem)
+
+    itemProperties.appendChild(itemNotes); 
 
     const itemRemove = document.createElement("button"); //remove item button
     itemRemove.id = "item-remove";
-    itemRemove.innerText = "Remove";
+    itemRemove.innerHTML = "&#128465";
     itemRemove.addEventListener("click", removeItem); //deletes item
 
     itemProperties.appendChild(itemRemove);
@@ -148,10 +154,10 @@ const getDetail = (e) => {
     const projectIndex = Number(document.querySelector(".folder.active").id); //gets current project index
     const currentItem = projectList[projectIndex].items[itemIndex]; //gets item from projectList
 
-    const nameBody = document.getElementById("name-body"); //gets the name input of the details modal
-    const detailBody = document.getElementById("detail-body"); //gets the detail input of details modal
-    const dateBody = document.getElementById("date-body"); //gets ..
-    const priorityBody = document.getElementById("priority-body"); //gets ..
+    const nameBody = document.getElementById("name-details"); //gets the name input of the details modal
+    const detailBody = document.getElementById("detail-details"); //gets the detail input of details modal
+    const dateBody = document.getElementById("date-details"); //gets ..
+    const priorityBody = document.getElementById("priority-details"); //gets ..
     
     nameBody.innerHTML = currentItem.title;
     detailBody.innerHTML = currentItem.details;
@@ -168,6 +174,7 @@ const getItemFromProject = (index) => {
     const projectIndex = Number(document.querySelector(".folder.active").id); //gets current project index
     const currentItem = projectList[projectIndex].items[index]; //gets item from projectList
     return currentItem;
+
 }
 
 //changes priority low->mid->high by one step per click
@@ -181,8 +188,6 @@ const changePriority = (e) => {
 
         item.classList.remove("low");
         item.classList.add("medium");
-        e.target.classList.remove("low");
-        e.target.classList.add("medium");
 
         currentItem.priority = "medium";
 
@@ -191,8 +196,6 @@ const changePriority = (e) => {
 
         item.classList.remove("medium");
         item.classList.add("high");
-        e.target.classList.remove("medium");
-        e.target.classList.add("high");
 
         currentItem.priority = "high";
 
@@ -201,12 +204,62 @@ const changePriority = (e) => {
 
         item.classList.remove("high");
         item.classList.add("low");
-        e.target.classList.remove("high");
-        e.target.classList.add("low");
 
         currentItem.priority = "low";
 
     }
+
+}
+
+//gets item details and allows edit
+const editItem = (e) => {
+    const currentItem = getItemFromProject(Number(e.target.parentElement.parentElement.id)); //get current item from item object (from projectlist)
+    const displayItem = e.target.parentElement.parentElement; //currentItem on display
+    const editButton = document.getElementById("edit-button"); //button that targets the edit form modal
+    const editName = document.getElementById("edit-name"); //name property on modal
+    const editDetails = document.getElementById("edit-details"); //details property on modal
+    const editDate = document.getElementById("edit-date"); //date property on modal
+    const getPriority = currentItem.priority; //get priority from currentItem
+    const editPriority = document.getElementById(`edit-${getPriority}`); //gets id of chosen priority
+
+    editName.value = currentItem.title; 
+    editDetails.value = currentItem.details;
+    editDate.value = currentItem.dueDate;
+    editPriority.checked = true;
+
+    editButton.click();
+    
+    //On submit, update the item's properties
+    document.forms[1].addEventListener("submit", (e) => {
+
+        e.preventDefault();
+        //removes the current priority display
+        displayItem.classList.remove(currentItem.priority);
+        const {name, details, date, priority} = e.target.elements; //input values of updated properties
+        
+        currentItem.title = name.value; 
+        currentItem.details = details.value; 
+        currentItem.dueDate = date.value;
+        currentItem.priority = priority.value;
+
+        updateDisplay(displayItem, currentItem);
+
+    })
+
+    if(!displayItem.classList.contains("low")|| !displayItem.classList.contains("medium") || !displayItem.classList.contains("high")){
+        displayItem.classList.add(currentItem.priority);
+    }
+}
+
+//helper function to editItem that takes the new Item values and updates the display
+const updateDisplay = (displayItem, currentItem) => {
+    
+    const newName = displayItem.children[0].children[1]; //item name
+    const newDate = displayItem.children[1].children[0]; //item date
+    
+    newName.innerHTML = currentItem.title; //update name
+    newDate.innerHTML = currentItem.dueDate; //update date
+    displayItem.classList.add(currentItem.priority); //update priority
 
 }
 
