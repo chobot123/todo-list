@@ -1,4 +1,5 @@
 import { projectList } from "./projects"; //to assign to-do items to each project in the list
+import { appendItemData, removeItemData } from "./storage";
 
 const getItemForm = document.forms[2];
 const itemList = document.querySelector(".list");
@@ -22,16 +23,21 @@ const Items = (title, details, dueDate, priority, indexInProject) => {
 
 //GETS USER INPUT AND DISPLAYS THE ITEM
 const getItem = (e) => {
+
   e.preventDefault();
   //get user input to make an item
   const {name, details, date, priority} = e.target.elements;
-  console.log(priority.value);
   const newItem = Items(name.value, details.value, date.value, priority.value);
+  const activeFolderId = document.querySelector(".folder.active").id;
 
-  
+  //projectList[Number(activeFolderId)].items.push(newItem); //add item to items list of the selected project
+  appendItemData(Number(activeFolderId), newItem);
+  newItem.indexInProject = projectList[Number(activeFolderId)].items.length - 1; //assign a position index in project to call
+
   assignItem(newItem); //add item to selected project
 
   getItemForm.reset();
+
 }
 
 //ASSIGNS THE ITEM TO THE CURRENT PROJECT AND MAKES A DISPLAY ELEMENT
@@ -40,8 +46,9 @@ const assignItem = (item) => {
     const activeFolderId = document.querySelector(".folder.active").id;
     const getItemContainer = document.querySelector(`.item-container-${activeFolderId}`);
 
-    projectList[Number(activeFolderId)].items.push(item); //add item to items list of the selected project
-    item.indexInProject = projectList[Number(activeFolderId)].items.length - 1; //assign a position index in project to call
+    //projectList[Number(activeFolderId)].items.push(item); //add item to items list of the selected project
+    //appendItemData(Number(activeFolderId), item);
+   //item.indexInProject = projectList[Number(activeFolderId)].items.length - 1; //assign a position index in project to call
     getItemContainer.appendChild(makeItem(item));
 
 }
@@ -266,7 +273,7 @@ const updateDisplay = (displayItem, currentItem) => {
 //remove item from display and project and updates accordingly
 const removeItem = (e) => { 
     const folderID = document.querySelector(".folder.active").id; 
-    const currentFolder = projectList[Number(folderID)];
+    const currentProject = projectList[Number(folderID)];
     const currentContainer = document.querySelector(`.item-container-${folderID}`); //current container
     const currentItem = e.target.parentElement.parentElement; //current item on display
 
@@ -277,9 +284,10 @@ const removeItem = (e) => {
     }
 
     currentContainer.removeChild(currentItem); //delete from display
-    currentFolder.items.splice(Number(currentItem.id), 1); //delete from array
+    removeItemData(Number(folderID), Number(currentItem.id));
+    currentProject.items.splice(Number(currentItem.id), 1); //delete from array
     
 }
 
 
-export {getItemForm, getItem}
+export {getItemForm, getItem, assignItem}

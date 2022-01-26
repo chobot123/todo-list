@@ -1,17 +1,16 @@
-import _ from 'lodash';
+import _, { initial } from 'lodash';
 
 import './styles/style.css'
 
-import {runModal} from './modules/modal.js'
-import {getForm, getProject, selectFolder} from './modules/projects.js'
-import {getItemForm, getItem} from  './modules/items'
+import { init, loadStorage } from './modules/loadPage';
 
-const content = document.querySelector(".content");
 
-runModal();
-selectFolder();
+window.addEventListener("DOMContentLoaded", loadStorage);
+init();
 
-getForm.addEventListener("submit", getProject);
-getItemForm.addEventListener("submit", getItem);
 
-export {content}
+// runModal();
+// selectFolder();
+
+// getForm.addEventListener("submit", getProject);
+// getItemForm.addEventListener("submit", getItem);
