@@ -2,10 +2,10 @@
 // load ProjectList
 // load active folder and subsequent to-do items
 
-import { assignItem, getItem, getItemForm } from "./items";
+import { makeItem, getItem, getItemForm } from "./items";
 import { runModal } from "./modal"
 import { displayFolder, displaySelected, getForm, getProject, selectFolder } from "./projects";
-import { getProjectList, setProjectList, projectList } from "./storage";
+import { getProjectList, setProjectList } from "./storage";
 
 const init = () => {
 
@@ -22,10 +22,9 @@ const loadStorage = () => {
     if(!getProjectList()){
         console.log(setProjectList());
         setProjectList();
-        
     }
     
-    console.log(getProjectList());
+    // console.log(getProjectList());
     getProjectList();
 
     displayProjects(getProjectList()); 
@@ -34,22 +33,26 @@ const loadStorage = () => {
 }
 
 const displayProjects = (projects) => {
-    
+
+    console.log(projects);
     projects.forEach((project, index) => {
+
+        console.log(index);
         displayFolder(project.name); //displays each folder
         displaySelected(index); //highlights selected and opens item container
+
     }); 
+    
 }
 
 const displayItems = (projects) => {
-    let activeProjectID;
 
     projects.forEach((project, index) => {
-        if(project.active){
-            activeProjectID = index;
-        }
+
+        const itemContainer = document.querySelector(`.item-container-${index}`);
+        project.items.forEach((item) => itemContainer.appendChild(makeItem(item)));
+
     });
-    projects[activeProjectID].items.forEach((item) => assignItem(item));
 }
 
 export {init, loadStorage}

@@ -1,5 +1,5 @@
 import { projectList } from "./projects"; //to assign to-do items to each project in the list
-import { appendItemData, removeItemData } from "./storage";
+import { appendItemData, removeItemData, setProjectList } from "./storage";
 
 const getItemForm = document.forms[2];
 const itemList = document.querySelector(".list");
@@ -32,8 +32,6 @@ const getItem = (e) => {
 
   //projectList[Number(activeFolderId)].items.push(newItem); //add item to items list of the selected project
   appendItemData(Number(activeFolderId), newItem);
-  newItem.indexInProject = projectList[Number(activeFolderId)].items.length - 1; //assign a position index in project to call
-
   assignItem(newItem); //add item to selected project
 
   getItemForm.reset();
@@ -45,6 +43,9 @@ const assignItem = (item) => {
 
     const activeFolderId = document.querySelector(".folder.active").id;
     const getItemContainer = document.querySelector(`.item-container-${activeFolderId}`);
+    item.indexInProject = projectList[Number(activeFolderId)].items.length - 1; //assign a position index in project to call
+    setProjectList();
+    console.log(item.indexInProject);
 
     //projectList[Number(activeFolderId)].items.push(item); //add item to items list of the selected project
     //appendItemData(Number(activeFolderId), item);
@@ -74,6 +75,7 @@ const makeItem = (item) => {
 
     const itemContainer = document.createElement("div"); //item
     itemContainer.className = "item";
+    
     itemContainer.id = item.indexInProject;
 
     const titleContainer = document.createElement("div"); //container for item title and if item is checked off
@@ -290,4 +292,4 @@ const removeItem = (e) => {
 }
 
 
-export {getItemForm, getItem, assignItem}
+export {getItemForm, getItem, makeItem}

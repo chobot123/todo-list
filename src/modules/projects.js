@@ -52,7 +52,7 @@ const makeFolder = (name) => {
     let temp = document.createElement("button");
     let projectName = name.charAt(0).toUpperCase() + name.slice(1);
     temp.className = "folder";
-    console.log(projectList);
+    // console.log(projectList);
     projectList.forEach((project, index) => {
         if((project.name.charAt(0).toUpperCase() + project.name.slice(1)) === projectName){
             temp.id = index;
@@ -63,7 +63,7 @@ const makeFolder = (name) => {
     listContainer.appendChild(temp);
 
     //make a item list container that shares the same id as the folder (for reference later)
-    makeItemList(projectList.length - 1);
+    makeItemList(Number(temp.id));
 
     return listContainer;
 
@@ -75,6 +75,8 @@ const makeFolder = (name) => {
  * @helper function
  */
 const makeItemList = (index) => {
+    console.log(`test`)
+    
     const list = document.querySelector(".item-container-list");
 
     const itemContainer = document.createElement("div");
@@ -130,7 +132,7 @@ const selectFolder = () => {
 }
 
 const displaySelected = (projectIndex) => {
-    console.log(projectList);
+    
     let selectedProject = document.querySelectorAll(".folder")[projectIndex];
     let itemList = document.querySelector(`.item-container-${projectIndex}`);
     if(projectList[projectIndex].active === true) {

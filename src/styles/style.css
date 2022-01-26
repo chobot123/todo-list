@@ -236,7 +236,7 @@ li {
    }
 
    .item-name,
-   .item-details,
+   .item-detail,
    .due-date,
    .item-priority {
      display: flex;
@@ -247,7 +247,7 @@ li {
      margin: 10px 0px;
    }
 
-   .item-details {
+   .item-detail {
      gap: 31px;
    }
 
